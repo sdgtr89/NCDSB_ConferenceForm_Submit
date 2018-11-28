@@ -1,0 +1,54 @@
+﻿@model IEnumerable<NCDSB_ConferenceForm_Submit.Models.MileageForm>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<head>
+    @Styles.Render("~/Content/FormOrganization.css")
+</head>
+
+<div class="row">
+    <h1>Mileage Forms</h1>
+    <h3>My Mileage Form Requests</h3>
+
+    <div>
+        <p><a class="btn btn-default" href="@Url.Action("Create", "MileageForms")">Begin Form &raquo;</a></p>
+    </div>
+
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Date)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FormStatus.StatusType)
+            </th>
+            <th>
+                
+            </th>
+
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Date)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FormStatus.StatusType)
+            </td>
+            <td></td>
+
+            <td>
+                @Html.ActionLink(" ", "Details", new { id = item.ID }, new { @class = "btn btn-success glyphicon glyphicon-info-sign" }) |
+                @Html.ActionLink(" ", "Delete", new { id = item.ID }, new { @class = "btn btn-primary glyphicon glyphicon-remove" })
+            </td>
+            
+        </tr>
+        }
+
+    </table>
+</div>

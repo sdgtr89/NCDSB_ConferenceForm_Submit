@@ -1,0 +1,78 @@
+﻿@model NCDSB_ConferenceForm_Submit.Models.Trip
+
+@{
+    ViewBag.Title = "Create";
+}
+@Html.Partial("menu")
+
+<head>
+    @Styles.Render("~/Content/FormOrganization.css")
+</head>
+
+<div class="row">
+    <h1>Mileage Form</h1>
+    <h2>Edit Trip</h2>
+
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-horizontal">
+            <input type="hidden" name="mileageFormID" value="@ViewBag.MileageFormID" />
+            @Html.HiddenFor(model => model.RowVersion)
+            <hr />
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            <div class="form-group">
+                @Html.LabelFor(model => model.StartAddressID, "Start Address", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.DropDownList("StartAddressID", null, "Select a Start Location", htmlAttributes: new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.StartAddressID, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.EndAddressID, "End Address", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.DropDownList("EndAddressID", null, "Select a End Location", htmlAttributes: new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.EndAddressID, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Distance, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Distance, new { htmlAttributes = new { @class = "form-control", @placeholder = "Distance /km" } })
+                    @Html.ValidationMessageFor(model => model.Distance, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="button" value="Calculate Distance" id="calcDis" class="btn btn-default" />
+                </div>
+            </div>
+            <div id="map"></div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.Date, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Date, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Date, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div>
+                <a class="btn btn-default" id="btnLeft" onclick="history.go(-1)">Back</a>
+                <input type="submit" value="Save" class="btn btn-default" />
+            </div>
+        </div>
+    }
+
+</div>
+@section Scripts {
+
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDLbnZlejIowWLpU4fyuwqIv0TD2F9ZGQE&callback=initMap"></script>
+
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/distanceCheck")
+    @Scripts.Render("~/bundles/createMap")
+}

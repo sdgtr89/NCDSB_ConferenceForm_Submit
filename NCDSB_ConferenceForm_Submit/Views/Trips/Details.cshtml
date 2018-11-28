@@ -1,0 +1,58 @@
+﻿@model NCDSB_ConferenceForm_Submit.Models.Trip
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Trip</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.EndAddress.SiteName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.EndAddress.SiteName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.MileageForm.CreatedBy)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MileageForm.CreatedBy)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.StartAddress.SiteName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.StartAddress.SiteName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Distance)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Distance)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Date)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Date)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

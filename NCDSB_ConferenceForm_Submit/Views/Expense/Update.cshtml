@@ -1,0 +1,72 @@
+﻿@model NCDSB_ConferenceForm_Submit.Models.Expense
+
+@{
+    ViewBag.Title = "Edit";
+}
+@Html.Partial("menu")
+
+<head>
+    @Styles.Render("~/Content/FormOrganization.css")
+</head>
+
+<div class="row">
+    <h1>Conference Form</h1>
+    <h2>Edit Expense</h2>
+
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-horizontal">
+            <hr />
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            @Html.HiddenFor(model => model.ID)
+            @Html.HiddenFor(model => model.RowVersion)
+
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.ExpenseTypeID, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.DropDownList("ExpenseTypeID", null, htmlAttributes: new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.ExpenseTypeID, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">                
+                @Html.LabelFor(model => model.ExpenseEstAmount, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.ExpenseEstAmount, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.ExpenseEstAmount, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Reason, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Reason, new { htmlAttributes = new { @class = "form-control", @placeholder = "Reason for expense..." } })
+                    @Html.ValidationMessageFor(model => model.Reason, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.BudgetCodeID, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.DropDownList("BudgetCodeID", null, htmlAttributes: new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.BudgetCodeID, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div>
+                <a class="btn btn-default" id="btnLeft" onclick="history.go(-1)">Back</a>
+                <input type="submit" value="Save" class="btn btn-default" />
+            </div>
+        </div>
+    }
+
+</div>
+
+</div>
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

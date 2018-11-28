@@ -1,0 +1,58 @@
+﻿@model NCDSB_ConferenceForm_Submit.Models.Expense
+
+@{
+    ViewBag.Title = "Create";
+}
+<head>
+    @Styles.Render("~/Content/FormOrganization.css")
+    @Styles.Render("~/Content/SubmitEstimate.css")
+    @Styles.Render("~/Content/CreateCon.css")
+</head>
+<div class="row">
+    <h1>Add Expense</h1>
+
+    <h3>Expense</h3>
+    <hr />
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-horizontal">
+
+            
+                <div>
+                    @Html.DropDownList("ExpenseTypeID", null, "Select an Expense type", htmlAttributes: new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.ExpenseTypeID, "", new { @class = "text-danger" })
+                </div>         
+
+                <br />
+           
+                <div>
+                    @Html.EditorFor(model => model.ExpenseEstAmount, new { htmlAttributes = new { @class = "form-control", @placeholder = "Enter estimated amount" } })
+                    @Html.ValidationMessageFor(model => model.ExpenseEstAmount, "", new { @class = "text-danger" })
+                </div>
+
+            
+                <div>
+                    @Html.EditorFor(model => model.Reason, new { htmlAttributes = new { @class = "form-control", @placeholder = "Reason for expense..." } })
+                    @Html.ValidationMessageFor(model => model.Reason, "", new { @class = "text-danger" })
+                </div>           
+                <div>
+                    @Html.DropDownList("BudgetCodeID", null, "Select a Budget Code", htmlAttributes: new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.BudgetCodeID, "", new { @class = "text-danger" })
+                </div>
+
+
+                <div>
+                    <input type="submit" value="Create" class="btn btn-default" id="btnRight" />
+                </div>
+        </div>
+        <input type="hidden" name="conferenceFormID" value="@ViewBag.ConferenceFormID" />
+    }
+
+    
+
+</div>
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

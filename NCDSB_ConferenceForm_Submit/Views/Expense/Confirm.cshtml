@@ -1,0 +1,108 @@
+﻿@model NCDSB_ConferenceForm_Submit.Models.Expense
+
+@{
+    ViewBag.Title = "Confirm";
+}
+@Html.Partial("menu")
+
+<head>
+    @Styles.Render("~/Content/FormOrganization.css")
+</head>
+
+<div class="row">
+    <h1>Conference Form</h1>
+    <h2>Confirm Expense</h2>
+
+
+    @using (Html.BeginForm("Confirm", "Expense", FormMethod.Post, new { enctype = "multipart/form-data" }))
+    {
+        @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.ID)
+        @Html.HiddenFor(model => model.RowVersion)
+
+        <div class="container">
+            <div class="col-sm-6">
+                <br />
+
+
+                <input type="hidden" name="conferenceFormID" value="@ViewBag.ConferenceFormID" />
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.ExpenseTypeID, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.DropDownList("ExpenseTypeID", null, htmlAttributes: new { @class = "form-control", @readonly = "readonly", @id = "dropdown" })
+                        @Html.ValidationMessageFor(model => model.ExpenseTypeID, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.ExpenseEstAmount, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.ExpenseEstAmount, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                        @Html.ValidationMessageFor(model => model.ExpenseEstAmount, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Reason, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.Reason, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                        @Html.ValidationMessageFor(model => model.Reason, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.ExpenseActAmount, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.ExpenseActAmount, new { htmlAttributes = new { @class = "form-control", @placeholder = "Enter actual amount...." } })
+                        @Html.ValidationMessageFor(model => model.ExpenseActAmount, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.BudgetCodeID, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.DropDownList("BudgetCodeID", null, "Select a Budget Code", htmlAttributes: new { @class = "form-control", @readonly = "readonly" })
+                        @Html.ValidationMessageFor(model => model.BudgetCodeID, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.Label("File Upload:", htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        <input type="file" class="" name="receiptUpload" /><br />
+                    </div>
+                </div>
+
+                <div>
+                    <a class="btn btn-default" id="btnLeft" onclick="history.go(-1)">Back</a>
+                    <input type="submit" value="Confirm" class="btn btn-default" id="btnCenter" />
+                </div>
+            </div>
+
+            <div class="col-sm-6">
+                <h3>Tips</h3>
+                <div id="left-col">
+                    <p>
+                        <b>When?:</b> Confirming an expense is something that should be done upon returning from a conference. Receipts need to be uploaded as proof of purchase for reimbursement.
+                    </p>
+                    <br />
+                    <p>
+                        <b>Not Working?:</b> Greyed out inputs are for reference of your estimates. You only need to fill out “Actual Expense” and “Browse” for a picture of the corresponding receipt.
+                    </p>
+                    <br />
+                </div>
+
+            </div>
+        </div>
+    </div>
+    }
+
+        </div>
+        @section Scripts {
+            @Scripts.Render("~/bundles/jqueryval")
+        }

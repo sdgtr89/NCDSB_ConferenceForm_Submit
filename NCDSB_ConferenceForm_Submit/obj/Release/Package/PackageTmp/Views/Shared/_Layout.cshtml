@@ -1,0 +1,81 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - My ASP.NET Application</title>
+    @Styles.Render("~/Content/css")
+    @Styles.Render("~/Content/MenuStyle.css")
+    @Scripts.Render("~/bundles/modernizr")
+</head>
+
+<body>
+    <a href="/Home/Index" id="logo-main"><img src="../../Content/images/Logo.png" alt="NDSB logo" /></a>
+
+    
+
+<div class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+        </div>
+        <div id="cssmenu" class="navbar-collapse collapse">
+            @if(User.Identity.IsAuthenticated)
+            {
+                <ul id="centered">
+                <li class='active has-sub'>
+                    <a href='#'><span>Conference Form</span></a>
+                    <ul>
+                        <li><a href="@Url.Action("Create", "Conferences")"><span>Submit Estimate</span></a></li>
+                        <li><a href="@Url.Action("Index", "ConferenceForms")"><span>My Forms</span></a></li>
+                    </ul>
+                </li>
+            </ul>
+            <ul id="centered">
+                <li class='active has-sub'>
+                    <a href='#'><span>Mileage Form</span></a>
+                    <ul>
+                        <li><a href="@Url.Action("Create", "MileageForms")"><span>Submit</span></a></li>
+                        <li><a href="@Url.Action("Index", "MileageForms")"><span>My Forms</span></a></li>
+                    </ul>
+                </li>
+            </ul>
+            <ul class="nav navbar-nav">                
+                <li>@Html.ActionLink("Conference List", "Index", "Conferences")</li>
+
+                @if(User.IsInRole("Admin"))
+                {
+                    <li>@Html.ActionLink("Reviewer List", "Index", "ConferenceForms")</li>
+                }
+                
+            </ul>
+            }
+            
+
+            @Html.Partial("_LoginPartial")
+        </div>
+    </div>
+</div>
+<div class="container body-content">
+    @RenderBody()
+    <hr />
+    <footer id="footer">
+        <p>
+            Niagara Catholic District School Board <br>
+            427 Rice Road Welland ON L3C 7C1 <br>
+            (905) 735-0240
+        </p>
+    </footer>
+</div>
+
+@Scripts.Render("~/bundles/jquery")
+@Scripts.Render("~/bundles/bootstrap")
+@RenderSection("scripts", required: false)
+</body>
+
+
+</html>

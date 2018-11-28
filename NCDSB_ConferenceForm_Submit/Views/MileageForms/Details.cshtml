@@ -1,0 +1,105 @@
+﻿@model NCDSB_ConferenceForm_Submit.ViewModels.MileageFormViewModel
+
+@{
+    ViewBag.Title = "Details";
+}
+@Html.Partial("menu")
+
+<head>
+    @Styles.Render("~/Content/FormOrganization.css")
+</head>
+
+<div class="row">
+    <h1>Mileage Form</h1>
+    <h2>Trips For: @Html.DisplayFor(model => model.MileageForm.Date)</h2>
+    <br />
+</div>
+@if (User.IsInRole("Admin"))
+{
+    @Html.ActionLink("Approve", "Edit", new { id = Model.MileageForm.ID }, new { @class = "btn btn-default" })
+}
+else
+{
+    @Html.ActionLink("Edit", "Edit", new { id = Model.MileageForm.ID }, new { @class = "btn btn-default" })
+}
+
+<table class="table">
+    <tr class="topbar">
+        <th>
+            Start
+        </th>
+        <th>
+            End
+        </th>
+        <th>
+            Date
+        </th>
+        <th>
+            Distance
+            @{decimal totalDistance = 0m; }
+        </th>
+        <th>
+            @Html.ActionLink(" ", "Create", "MileageFormMaster", new
+            {
+                mileageFormID = Model.MileageForm.ID,
+                mileageSummary = Model.MileageForm.Summary
+            },
+                                          new { @class = "btn btn-success glyphicon glyphicon-plus" })
+        </th>
+    </tr>
+
+    @foreach (NCDSB_ConferenceForm_Submit.Models.Trip item in ViewBag.Trips)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.StartAddress.SiteName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.EndAddress.SiteName)
+
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ShortDate)
+
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Distance)
+                @{ totalDistance += item.Distance;} km
+            </td>
+            <td>
+                @Html.ActionLink(" ", "Update", "Trip", new { id = item.ID, mileageFormID = Model.MileageForm.ID, mileageSummary = Model.MileageForm.Summary }, new { @class = "btn btn-primary glyphicon glyphicon-edit" })
+                @Html.ActionLink(" ", "Remove", "Trip", new { id = item.ID, mileageFormID = Model.MileageForm.ID, mileageSummary = Model.MileageForm.Summary }, new { @class = "btn btn-danger glyphicon glyphicon-remove" })
+            </td>
+
+        </tr>
+    }
+    <tr>
+        <td></td>
+        <td></td>
+        <td align="right">
+            Total Distance:
+        </td>
+        <td>
+            @totalDistance.ToString() km
+        </td>
+
+        <td></td>
+    </tr>
+    <tr>
+        <td></td>
+        <td></td>
+        <td align="right">
+            Total Cost (48¢/km):
+            @{decimal cost = totalDistance * 0.48m;}
+        </td>
+        <td>
+            @cost.ToString("c2")
+        </td>
+
+        <td></td>
+    </tr>
+</table>
+
+<div>
+    @Html.ActionLink("Submit", "Index", "", new { @class = "btn btn-default" })
+</div>

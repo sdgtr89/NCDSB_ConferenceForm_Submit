@@ -1,0 +1,23 @@
+﻿
+h3{
+    text-align:center;
+}
+
+.btn-default {
+    margin-top: 20px;
+    width: 80px;
+}
+
+#btnRight {
+    float: right;
+    margin-right: 50px;
+}
+
+#btnLeft {
+    float: left;
+    margin-left: 50px;
+}
+
+dt, dd{
+    padding-bottom: 7px;
+}

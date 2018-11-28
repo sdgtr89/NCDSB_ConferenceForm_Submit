@@ -1,0 +1,89 @@
+﻿@model NCDSB_ConferenceForm_Submit.Models.Expense
+
+@{
+    ViewBag.Title = "Create";
+}
+@Html.Partial("menu")
+
+<head>
+    @Styles.Render("~/Content/FormOrganization.css")
+</head>
+
+<div class="row">
+    <h1>Conference Form</h1>
+    <h2>Add Expense</h2>
+
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <hr />
+
+        <div class="container">
+            <div class="col-sm-6">
+                <br />
+
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.ExpenseTypeID, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.DropDownList("ExpenseTypeID", null, "Select an Expense type", htmlAttributes: new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.ExpenseTypeID, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.ExpenseEstAmount, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.ExpenseEstAmount, new { htmlAttributes = new { @class = "form-control", @placeholder = "Enter estimated amount" } })
+                        @Html.ValidationMessageFor(model => model.ExpenseEstAmount, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Reason, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.Reason, new { htmlAttributes = new { @class = "form-control", @placeholder = "Reason for expense..." } })
+                        @Html.ValidationMessageFor(model => model.Reason, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(model => model.BudgetCodeID, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.DropDownList("BudgetCodeID", null, "Select a Budget Code", htmlAttributes: new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.BudgetCodeID, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div>
+                    <a class="btn btn-default" id="btnLeft" onclick="history.go(-1)">Back</a>
+                    <input type="submit" value="Create" class="btn btn-default" id="btnRight" />
+                </div>
+            </div>
+
+            <div class="col-sm-6">
+                <h3>Tips</h3>
+                <div id="left-col">
+                    <p>
+                        <b>Note:</b> Adding an expense will result in it being added to an accumulative total under “Add Expenses” on the previous page. Expenses are estimates and need to be approved upon returning.
+                    </p>
+                    <br />
+                    <p>
+                        <b>Not Working?:</b> If your form wont submit you incorrectly put a value in or forgot to fill out a required input. This should be brought to your attention by red text.
+                    </p>
+                    <br />
+                </div>
+            </div>
+        </div>
+    </div>
+        <input type="hidden" name="conferenceFormID" value="@ViewBag.ConferenceFormID" />
+    }
+
+
+
+        </div>
+        @section Scripts {
+            @Scripts.Render("~/bundles/jqueryval")
+        }

@@ -1,0 +1,78 @@
+﻿#logo-main {
+    display: block;
+    position: absolute;
+    top: 15px;
+    left: 15px;
+}
+
+#logo-main img {
+    width: 260px;
+    height: auto;
+}
+
+/*nav bar style*/
+.navbar {
+    background-color: #0a419f;
+    box-shadow: 0 5px 15px 0 rgba(0, 0, 0, 0.25); 
+}
+.dropdown-menu {
+    background-color: #0a419f;
+}
+
+.dropdown-menu > li > a:hover {
+    background-color: #000000;
+}
+
+.dropdown-menu > li > a > span {
+    color: #ffffff;
+}
+
+.navbar-fixed-top {
+    position: absolute;
+    margin-top: 90px;
+}
+
+/*resize user logo*/
+#userlogo {
+    display: inline-block;
+    width: 40px;
+    height: auto;
+}
+
+.userWhite {
+    color: #999999;
+}
+
+.userWhite:hover {
+    color: #cccccc;
+    text-decoration: none;
+}
+
+#userName{
+    float: left;
+    margin-top:7px;
+    font-size: 17px;
+}
+
+h1 {
+    font-family: Helvetica, Arial, sans-serif;
+    font-style: normal;
+    padding-right: 20px;
+    position: relative;
+    float: right;
+}
+
+h2 {
+    font-family: Helvetica, Arial, sans-serif;
+}
+
+p {
+    font-family: Segoe UI, Helvetica, Arial, sans-serif;
+}
+
+/*move website content down*/
+.row {
+    padding-top: 160px;
+}
+
+

@@ -1,0 +1,54 @@
+﻿@model PagedList.IPagedList<NCDSB_ConferenceForm_Submit.Models.MileageForm>
+@using PagedList.Mvc;
+<link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
+
+@{
+    ViewBag.Title = "Index";
+}
+@Html.Partial("menu")
+
+<head>
+    @Styles.Render("~/Content/FormOrganization.css")
+</head>
+
+<div class="row">
+    <h1>Mileage Forms</h1>
+    <h2>Mileage Form Requests</h2>
+
+    <div>
+        <p><a class="btn btn-default" href="@Url.Action("Create", "MileageForms")">Begin Form &raquo;</a></p>
+    </div>
+
+    <table class="table">
+        <tr class="topbar">
+            <th class="mileFromCol1">
+                @Html.ActionLink("Date", "Index", new { sortOrder = ViewBag.DateSort })
+            </th>
+            <th class="mileFromCol2">
+                @Html.ActionLink("Form Status", "Index", new { sortOrder = ViewBag.FormStatusSort })
+            </th>
+            <th class="mileFromCol3"></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td class="col1">
+                    @Html.DisplayFor(modelItem => item.Date)
+                </td>
+                <td class="col1">
+                    @Html.DisplayFor(modelItem => item.FormStatus.StatusType)
+                </td>
+                <td class="col1">
+                    @Html.ActionLink(" ", "Details", new { id = item.ID }, new { @class = "btn btn-primary glyphicon glyphicon-info-sign" })
+                    @Html.ActionLink(" ", "Remove", new { id = item.ID }, new { @class = "btn btn-danger glyphicon glyphicon-remove" })
+                </td>
+            </tr>
+
+
+        }
+        Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+
+        @Html.PagedListPager(Model, page => Url.Action("Index", new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }))
+    </table>
+</div>

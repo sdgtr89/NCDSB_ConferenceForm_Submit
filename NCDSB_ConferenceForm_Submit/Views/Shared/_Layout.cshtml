@@ -1,0 +1,28 @@
+﻿<!DOCTYPE html>
+@*<html>*@
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - My ASP.NET Application</title>
+    @Styles.Render("~/Content/css")
+    @Styles.Render("~/Content/MenuStyle.css")
+    @Scripts.Render("~/bundles/modernizr")
+</head>
+
+<div id="container">
+    <div id="header"></div>
+    <div class="container body-content"id="body">
+        @RenderBody()
+    </div>
+    <div id="footer">
+        <p> Niagara Catholic District School Board <br/>
+            427 Rice Road Welland ON L3C 7C1 <br/>
+            (905) 735-0240
+        </p>
+    </div>
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+</div>
+@*</html>*@

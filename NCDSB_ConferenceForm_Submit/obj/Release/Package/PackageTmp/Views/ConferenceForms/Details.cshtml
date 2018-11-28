@@ -1,0 +1,242 @@
+﻿@model NCDSB_ConferenceForm_Submit.ViewModels.ConferenceFormVM
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<head>
+    @Styles.Render("~/Content/FormOrganization.css")
+    @Styles.Render("~/Content/DetailsCon.css")
+</head>
+
+<div class="row">
+    <h1>Conference Form</h1>
+    <h3>Step 3: Review Basic Information/Add Expenses</h3>
+    <h4>Conference Form for @Model.ConferenceForm.StaffMember.FullName : @Model.ConferenceForm.Conference.ConferenceDate</h4>
+    <div>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.ConferenceForm.Conference.ConferenceSummary):
+            </dt>
+
+            <dd>
+                @Model.ConferenceForm.Conference.ConferenceSummary
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.ConferenceForm.BenefitOfAttending):
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.ConferenceForm.BenefitOfAttending)
+            </dd>
+
+            <dt>
+                Replacement Staff:
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.ConferenceForm.ReqReplacementStaff)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.ConferenceForm.Conference.Cost):
+            </dt>
+
+            <dd>
+                $@Html.DisplayFor(model => model.ConferenceForm.Conference.Cost)
+            </dd>
+            
+
+            <dt>
+                @Html.DisplayNameFor(model => model.ConferenceForm.FormStatus.StatusType):
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.ConferenceForm.FormStatus.StatusType)
+            </dd>
+        </dl>
+    </div>
+</div>
+<div>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.ConferenceForm.ID }, new { @class = "btn btn-default" })
+</div>
+
+<h3 id="step3">Add Expenses</h3>
+
+<table class="table">
+    <tr>
+        <th>
+            Expenses
+        </th>
+        <th>
+            Estimated Costs
+            @{decimal totalFees = Model.ConferenceForm.Conference.Cost; }
+        </th>
+        <th>
+            Confirmed?
+        </th>
+
+        <th>Actual Amount</th>
+        @{decimal actualAmount = Model.ConferenceForm.Conference.Cost; }
+
+        <th>
+            @Html.ActionLink(" ", "Add", "Expense", new
+            {
+                conferenceFormID = Model.ConferenceForm.ID,
+                conferenceSummary = Model.ConferenceForm.Conference.ConferenceSummary
+            },
+                      new { @class = "btn btn-success glyphicon glyphicon-plus" })
+        </th>
+    </tr>
+
+    @foreach (NCDSB_ConferenceForm_Submit.Models.Expense item in ViewBag.Expenses)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.ExpenseType.TypeOfExpense)
+            </td>
+
+            <td>
+                $@Html.DisplayFor(modelItem => item.ExpenseEstAmount)
+                @{ totalFees += item.ExpenseEstAmount;}
+            </td>
+
+
+            @if (item.ExpenseActAmount.HasValue)
+            {
+                <td>Yes</td>
+                <td>@item.ExpenseActAmount</td>
+                actualAmount += item.ExpenseActAmount.GetValueOrDefault();
+            }
+            else
+            {
+                <td>No</td>
+                <td>N/A</td>
+            }
+
+            <td>
+                @Html.ActionLink(" ", "Update", "Expense",
+                      new { id = item.ID, conferenceFormID = Model.ConferenceForm.ID, conferenceSummary = Model.ConferenceForm.Conference.ConferenceSummary },
+                      new { @class = "btn btn-primary glyphicon glyphicon-edit" })
+                @Html.ActionLink(" ", "Confirm", "Expense",
+                      new { id = item.ID, conferenceFormID = Model.ConferenceForm.ID, conferenceSummary = Model.ConferenceForm.Conference.ConferenceSummary },
+                      new { @class = "btn btn-success glyphicon glyphicon-ok" })
+                @Html.ActionLink(" ", "Remove", "Expense",
+                      new { id = item.ID, conferenceFormID = Model.ConferenceForm.ID, conferenceSummary = Model.ConferenceForm.Conference.ConferenceSummary },
+                      new { @class = "btn btn-primary glyphicon glyphicon-remove" })
+            </td>
+
+        </tr>
+    }
+    <tr>
+        <td align="right">
+            Total Estimated Fees (Including conference cost):
+        </td>
+        <td>
+            <strong>@totalFees.ToString("c")</strong>
+        </td>
+        <td></td>
+        <td></td>
+    </tr>
+    <tr>
+        <td align="right">
+            Total Confirmed Fees (Including conference cost):
+        </td>
+        <td>
+            <strong> @actualAmount.ToString("c")</strong>
+        </td>
+        <td></td>
+        <td></td>
+    </tr>
+</table>
+
+<br />
+
+<h3 id="step4">Add Mileage</h3>
+
+<table class="table">
+    <tr>
+        <th>
+            Start
+        </th>
+        <th>
+            End
+        </th>
+        <th>
+            Date
+        </th>
+        <th>
+            Distance
+            @{decimal totalDistance = 0m; }
+        </th>
+        <th>
+            @Html.ActionLink(" ", "AddForConference", "Trip", new
+            {
+                conferenceFormID = Model.ConferenceForm.ID,
+                conferenceSummary = Model.ConferenceForm.Conference.Summary
+            },
+                     new { @class = "btn btn-success glyphicon glyphicon-plus" })
+        </th>
+    </tr>
+
+    @foreach (NCDSB_ConferenceForm_Submit.Models.Trip item in ViewBag.Trips)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.StartAddress.SiteName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.EndAddress.SiteName)
+
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ShortDate)
+
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Distance)
+                @{ totalDistance += item.Distance;}
+            </td>
+            <td>
+                @Html.ActionLink(" ", "UpdateForConference", "Trip",
+                         new { id = item.ID, conferenceFormID = Model.ConferenceForm.ID, conferenceSummary = Model.ConferenceForm.Conference.ConferenceSummary },
+                         new { @class = "btn btn-primary glyphicon glyphicon-edit" })
+                @Html.ActionLink(" ", "RemoveForConference", "Trip",
+                         new { id = item.ID, conferenceFormID = Model.ConferenceForm.ID, conferenceSummary = Model.ConferenceForm.Conference.ConferenceSummary },
+                         new { @class = "btn btn-danger glyphicon glyphicon-remove" })
+            </td>
+
+        </tr>
+    }
+    <tr>
+        <td></td>
+        <td></td>
+        <td align="right">
+            Total Distance (km):
+        </td>
+        <td>
+            <strong>@totalDistance.ToString()</strong>
+        </td>
+
+        <td></td>
+    </tr>
+    <tr>
+        <td></td>
+        <td></td>
+        <td align="right">
+            Total Cost (48¢/km):
+            @{decimal cost = totalDistance * 0.48m;}
+        </td>
+        <td>
+            <strong>@cost.ToString("c2")</strong>
+        </td>
+
+        <td></td>
+    </tr>
+</table>
+
+<div>
+    @Html.ActionLink("Submit", "Index", "", new { @class = "btn btn-default" })
+</div>

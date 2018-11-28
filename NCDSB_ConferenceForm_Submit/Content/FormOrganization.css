@@ -1,0 +1,137 @@
+﻿#login{
+    text-align: left;
+    /*padding-left: 7%;*/
+}
+.rowLogin {
+    padding-top: 300px;
+}
+
+/*_layout formating for footer*/
+html,
+body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+}
+
+#container {
+    min-height: 100%;
+    position: relative;
+}
+
+#body {
+    padding: 10px;
+    padding-bottom: 85px; /* Height of the footer */
+}
+
+#footer {
+    display: block;
+    text-align: center;
+    position: absolute;
+    bottom: 0px;
+    width: 100%;
+    height: 85px; /* Height of the footer */
+    padding-top: 6px;
+    border-top: solid;
+    border-color: #E8E8E8;
+    border-width: thin;
+    /*background-color: #F5F5F5;*/
+}
+
+h1 {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-family: Helvetica, Arial, sans-serif;
+    font-style: normal;
+    font-size: 36px;
+    font-weight: 400;
+}
+
+.control-label, .col-md-2 {
+    padding: 0;
+    float: left;
+    text-align: center;
+}
+
+h2{
+    text-align: center;
+}
+
+.subTitle{
+    text-align:center;
+}
+
+#wrap {
+    width: 1500px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#left-col {
+    float: left;
+    width: 650px;
+}
+
+#right-col {
+    float: right;
+    width: 650px;
+}
+
+.col1 {
+    width: 43.4%;
+}
+
+textarea {
+    max-width: 280px;
+    padding: 12px 20px;
+    box-sizing: border-box;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    resize: none;
+}
+
+/*conferenceForms/create -> text area correct width*/
+.conFormTextBox {
+    max-width: 360px;
+}
+
+/*table collumn equal spacing*/
+.col1, .col2, .col3, .col4, .col4, .col15 {
+    width: 21.8%;
+}
+
+
+/*table collumn Conference Forms*/
+.conFromCol1 {
+    width: 50%;
+}
+
+.conFromCol2, .conFromCol3 {
+    width: 20%;
+}
+.conFromCol4 {
+    width: 10%;
+}
+
+/*table collumn spacing Mileage Forms*/
+.mileFromCol1, .mileFromCol2, .mileFromCol3 {
+    width: 45%;
+}
+
+/*table collumn spacing Conferences*/
+.consCol1 {
+    width: 40%;
+}
+
+.consCol2, .consCol3, .consCol4, .consCol5 {
+    width: 10%;
+}
+
+.consCol6 {
+    width: 4.8%;
+}
+
+.topbar {
+    background-color: #E8E8E8;
+}

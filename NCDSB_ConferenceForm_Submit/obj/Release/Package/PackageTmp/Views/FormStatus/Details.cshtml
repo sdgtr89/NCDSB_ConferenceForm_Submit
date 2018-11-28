@@ -1,0 +1,27 @@
+﻿@model NCDSB_ConferenceForm_Submit.Models.FormStatus
+
+@{
+    ViewBag.Title = "Details";
+}
+<div class="row">
+    <h2>Details</h2>
+
+    <div>
+        <h4>FormStatus</h4>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.StatusType)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.StatusType)
+            </dd>
+
+        </dl>
+    </div>
+    <p>
+        @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |
+        @Html.ActionLink("Back to List", "Index")
+    </p>
+</div>

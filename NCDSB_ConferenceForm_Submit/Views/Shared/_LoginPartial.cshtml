@@ -1,0 +1,24 @@
+﻿
+
+    @Styles.Render("~/Content/FormOrganization.css")
+
+@using Microsoft.AspNet.Identity
+@if (Request.IsAuthenticated)
+{
+    using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
+    {
+        @Html.AntiForgeryToken()
+
+    <div id="userName">
+        <img src="../../Content/images/userlogo.png" alt="user logo" id="userlogo" />
+        <a class="userWhite" href="#" data-toggle="dropdown" class="dropdown-toggle">@User.Identity.GetUserName() </a>
+        <a class="userWhite" href="javascript:document.getElementById('logoutForm').submit()">| Log off</a>
+    </div>
+    }
+}
+else
+{
+    <ul class="nav navbar-nav navbar-right">
+        <li>@Html.ActionLink("Login", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>
+    </ul>
+}

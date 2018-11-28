@@ -1,0 +1,54 @@
+﻿@model IEnumerable<NCDSB_ConferenceForm_Submit.Models.Expense>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<div class="row">
+    <h2>Index</h2>
+
+    <p>
+        @Html.ActionLink("Create New", "Create")
+    </p>
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.ConferenceForm.ConferenceFormSummary)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ExpenseType.TypeOfExpense)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ExpenseEstAmount)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Reason)
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ConferenceForm.ConferenceFormSummary)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ExpenseType.TypeOfExpense)
+                </td>                
+                <td>
+                    @Html.DisplayFor(modelItem => item.ExpenseEstAmount)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Reason)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.ID }) |
+                    @Html.ActionLink("Details", "Details", new { id = item.ID }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.ID })
+                </td>
+            </tr>
+        }
+
+    </table>
+
+</div>

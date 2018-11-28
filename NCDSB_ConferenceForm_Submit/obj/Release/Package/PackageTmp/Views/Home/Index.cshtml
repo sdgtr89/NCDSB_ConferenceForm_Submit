@@ -1,0 +1,46 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+
+<head>
+    @Styles.Render("~/Content/FormOrganization.css")
+    @Styles.Render("~/Content/Home.css")
+</head>
+
+<h1>Home</h1>
+
+<div class="row">
+    <h2>Remember</h2>
+    <div class="tabing">
+        <p>1. Book 90 days in advance.</p>        
+        <p>2. Receipts and proof of purchase must be saved for reimbursement.</p>
+        <p>3. Booked days are not guaranteed.</p>
+    </div>
+
+    <h2>How Do I Book A Conference?</h2>
+    <div class="tabing">
+
+        <p>
+            Conferences can be booked by selecting the “Conference Form” tab in the menu. Before you begin, you may browse
+            a list of conferences already on record. The form begins by allowing you to enter a conference, if this does not
+            apply to you, select skip and you will be greeted by a detailed walk through of the form and required information. 
+            Upon completion, you will be able to view your submitted application, make changes and view your approval status. 
+            Don’t forget upon arriving home from the conference to complete the receipt upload or you will run the risk of 
+            reimbursement denial.
+        </p>
+        <p><a class="btn btn-default" href="@Url.Action("Index", "Conferences")">Browse Conferences &raquo;</a></p>
+        <p><a class="btn btn-default" href="@Url.Action("Create", "Conferences")">Begin Conference Form &raquo;</a></p>
+    </div>
+
+    <h2>How Do I Submit Mileage?</h2>
+    <div class="tabing">
+        <p>
+            Mileage can be submitted by selecting the “Mileage Form” tab in the menu or completed as part of the conference form walk
+            through. The selection of the Mileage Form tab will be accompanied by a basic walk through of the from. To add a Mileage
+            Form while completing your conference form. Select the “Add Mileage” button in Step 2 under your form information details.
+            Don’t forget upon arriving home from the conference to complete the receipt upload or you will run the risk of reimbursement
+            denial.
+        </p>
+        <p><a class="btn btn-default" href="@Url.Action("Create", "MileageForms")">Begin Mileage Form &raquo;</a></p>
+    </div>
+</div>

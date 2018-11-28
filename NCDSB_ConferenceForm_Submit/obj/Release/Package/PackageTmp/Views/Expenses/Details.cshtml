@@ -1,0 +1,74 @@
+﻿@model NCDSB_ConferenceForm_Submit.Models.Expense
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Expense</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.ConferenceForm.BenefitOfAttending)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ConferenceForm.BenefitOfAttending)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ExpenseType.TypeOfExpense)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ExpenseType.TypeOfExpense)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Receipt.MimeType)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Receipt.MimeType)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ExpenseEstAmount)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ExpenseEstAmount)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Reason)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Reason)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ExpenseActAmount)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ExpenseActAmount)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ReceiptID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ReceiptID)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

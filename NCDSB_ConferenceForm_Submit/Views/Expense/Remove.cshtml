@@ -1,0 +1,79 @@
+﻿@model NCDSB_ConferenceForm_Submit.Models.Expense
+
+@{
+    ViewBag.Title = "Delete";
+}
+@Html.Partial("menu")
+
+<head>
+    @Styles.Render("~/Content/FormOrganization.css")
+</head>
+
+<div class="row">
+    <h1>Conference Form</h1>
+    <h2>Are you sure you want to delete this?</h2>
+    
+
+    <div>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.ConferenceForm.BenefitOfAttending)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.ConferenceForm.BenefitOfAttending)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.ExpenseType.TypeOfExpense)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.ExpenseType.TypeOfExpense)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.ExpenseEstAmount)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.ExpenseEstAmount)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Reason)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Reason)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.ExpenseActAmount)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.ExpenseActAmount)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.BudgetCode.CodeType)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.BudgetCode.CodeType)
+            </dd>
+        </dl>
+
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+
+        <div>
+            <a class="btn btn-default" id="btnLeft" onclick="history.go(-1)">Back</a>
+            <input type="submit" value="Delete" class="btn btn-default" />
+        </div>
+        }
+    </div>
+</div>

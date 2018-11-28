@@ -1,0 +1,87 @@
+﻿@model NCDSB_ConferenceForm_Submit.Models.ConferenceForm
+
+@{
+    ViewBag.Title = "Edit";
+}
+@Html.Partial("menu")
+
+<head>
+    @Styles.Render("~/Content/FormOrganization.css")
+    @*@Styles.Render("~/Content/SubmitEstimate.css")*@
+</head>
+
+<div class="row">
+    <h1>Conference Form</h1>
+    <h2>Edit Basic Conference Information</h2>
+
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-horizontal">
+            <hr />
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            @Html.HiddenFor(model => model.ID)
+            @Html.HiddenFor(model => model.RowVersion)
+
+            <div class="form-group">
+                <div class="col-md-10">
+                    <div class="input-group">
+                        <div class="input-group-btn">
+                            <button class="btn btn-default" id="ddlRefresh" type="button"><span class="glyphicon glyphicon-refresh"></span></button>
+                            <a href="@Url.Action("Create", "Conferences",
+                        new { addDoctor = "AddConference" })" ,
+                               target="_blank" type="submit" id="addConference" class="btn btn-default">
+                                <span class="glyphicon glyphicon-plus"></span>
+                            </a>
+                        </div>
+                        @Html.DropDownList("ConferenceID", null, "Select Conference", htmlAttributes: new { @class = "form-control", @id = "dropdown" })
+                    </div>
+                    @Html.ValidationMessageFor(model => model.ConferenceID, "", new { @class = "text-danger", @id = "selectCon" })<br />
+                    <span id="aboutDoctor"></span>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-10">
+                    @Html.ValidationMessageFor(model => model.BenefitOfAttending, "", new { @class = "text-danger" })
+                    @Html.TextAreaFor(model => model.BenefitOfAttending, new { @class = "form-control conFormTextBox", rows = "6", @placeholder = "How would your attendance benefit the NCDSB..." })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-10">
+                    <div class="checkbox">
+                        @Html.EditorFor(model => model.ReqReplacementStaff)
+                        @Html.Label("Substitute Staff Required?")
+                        @Html.ValidationMessageFor(model => model.ReqReplacementStaff, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+
+            @*<div class="form-group">
+                    <div class="col-md-offset-2 col-md-10">
+                        <input type="submit" value="Save" class="btn btn-default" />
+                    </div>
+                </div>*@
+            @if (User.IsInRole("Admin"))
+            {
+                 @Html.DropDownList("FormStatusID", null, "", htmlAttributes: new { @class = "form-control", @id = "dropdown" })
+                 @Html.ValidationMessageFor(model => model.ConferenceID, "", new { @class = "text-danger", @id = "selectCon" })<br />
+            }
+        </div>
+       
+        <div>
+            <a class="btn btn-default" id="btnLeft" onclick="history.go(-1)">Back</a>
+            <input type="submit" value="Save" class="btn btn-default" />
+            @*@Html.ActionLink(" ", "Index", null, new { @class = "btn btn-danger glyphicon glyphicon-remove" })*@
+        </div>
+    }
+
+
+
+</div>
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

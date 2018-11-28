@@ -1,0 +1,31 @@
+﻿
+h1 {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-family: Helvetica, Arial, sans-serif;
+    font-style: normal;
+    font-size: 36px;
+    font-weight: 500;
+}
+
+.control-label, .col-md-2 {
+    padding: 0;
+    float: left;
+    text-align: center;
+}
+
+h3,h4,h5 {
+    text-align: center;
+    padding-bottom: 25px;
+}
+
+
+
+/*hr {
+    padding-bottom: 25px;
+}*/
+
+/*.btn-default {
+    width: 80px;
+}*/

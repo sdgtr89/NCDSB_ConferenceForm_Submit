@@ -1,0 +1,149 @@
+﻿@model NCDSB_ConferenceForm_Submit.Models.ConferenceForm
+
+@{
+    ViewBag.Title = "Create";
+}
+@Html.Partial("menu")
+
+<head>
+    @Styles.Render("~/Content/FormOrganization.css")
+    <link href="~/Content/themes/base/jquery-ui.css" rel="stylesheet" />
+    <link href="~/Content/themes/base/jquery-ui.min.css" rel="stylesheet" />
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+</head>
+
+<div class="row">
+    <h1>Conference Form</h1>
+    <h2 class="subTitle">Basic Conference Information</h2>
+
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <input type="hidden" name="StaffMemberID" value="@User.Identity.Name" />
+
+        <div class="container">
+            <div class="col-sm-6">
+                <br/>
+                <div>
+                    @Html.Label("Step 1:")
+                    <div class="input-group">
+                        <div class="input-group-btn">
+                            <a href="@Url.Action("Create", "ConferenceForms", new { addDoctor = "AddConference" })" ,
+                               class="btn btn-default">
+                                <span class="glyphicon glyphicon-refresh"></span>
+
+                            </a>
+                            <a href="@Url.Action("Create", "Conferences", new { addDoctor = "AddConference" })" ,
+                               target="_blank" type="submit" id="addConference" class="btn btn-default">
+                                <span class="glyphicon glyphicon-plus"></span>
+
+                            </a>
+                            
+                        </div>
+                        @Html.DropDownList("ConferenceID", null, "Select Conference", htmlAttributes: new { @class = "form-control", @id = "dropdown" })
+                        
+                        @Html.ValidationMessageFor(model => model.ConferenceID, "", new { @class = "text-danger" })
+                    </div>
+                    @Html.ValidationMessageFor(model => model.ConferenceID, "", new { @class = "text-danger", @id = "selectCon" })<br />
+                    <span id="aboutDoctor"></span>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-10">
+                        @Html.Label("Step 2:")
+                        @Html.ValidationMessageFor(model => model.BenefitOfAttending, "", new { @class = "text-danger", @id = "textAreaBox" })
+                        @Html.TextAreaFor(model => model.BenefitOfAttending, new { @class = "form-control conFormTextBox", rows = "6", @placeholder = "How would your attendance benefit the NCDSB..." })
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-10">
+                        @Html.Label("Step 3:")
+                        @Html.EditorFor(model => model.ReqReplacementStaff)
+                        @Html.Label("Substitute Staff Required?")
+                        @Html.ValidationMessageFor(model => model.ReqReplacementStaff, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div>
+                    <input type="submit" value="Submit" class="btn btn-default" id="btnRight" />
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <h3>Instruction</h3>
+                <div id="left-col">
+                    <p>
+                        <b>Step1:</b> Select a Conference from the drop down list. If your conference is not displayed click the PLUS button to add your conference you wish to attend. Click the CIRCLE button and select your newly added conference from the drop down list.
+                    </p>
+                    <br />
+                    <p>
+                        <b>Step2:</b> Explain how your attendance to the conference will benefit the Niagara Catholic District School board.
+                    </p>
+                    <br />
+                    <p>
+                        <b>Step3:</b> Will your absence require the hiring of a substitute staff member, if yes, select the check box.
+                    </p>
+                </div>
+                <input type="hidden" id="hfCustomer" name="CustomerId" />
+            </div>
+        </div>
+    </div>
+    }
+</div>
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/jqueryui")
+    @Scripts.Render("~/bundles/refreshDropDown")
+    <script type="text/javascript">
+        $('#ddlRefresh').click(function (event) {
+            event.preventDefault();
+            refreshDDL('ConferenceID', 'ConferenceForms/GetConferences', true, 'Select a Conference');
+        });
+        $('#ConferenceID').change(function () {
+            var selectedConference = $("#ConferenceID").val();
+            var URL = "/Conference/GetAConferenceString/" + selectedConference;
+            var responseText = $.ajax({ url: URL, type: "GET", async: false }).responseText;
+            $('#aboutConference').text(responseText);
+        });
+    </script>
+    <script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.10.0.min.js" type="text/javascript"></script>
+    
+    <link href="http://ajax.aspnetcdn.com/ajax/jquery.ui/1.9.2/themes/blitzer/jquery-ui.css"
+          rel="Stylesheet" type="text/css" />
+    <script type="text/javascript">
+        $(function () {
+            $("#TempName").autocomplete({
+                source: function (request, response) {
+                    $.ajax({
+                        url: '/Conferences/GetConferences/',
+                        data: "{ 'prefix': '" + request.term + "'}",
+                        dataType: "json",
+                        type: "POST",
+                        contentType: "application/json; charset=utf-8",
+                        success: function (data) {
+                            response($.map(data, function (item) {
+                                return item;
+                            }))
+                        },
+                        error: function (response) {
+                            alert(response.responseText);
+                        },
+                        failure: function (response) {
+                            alert(response.responseText);
+                        }
+                    });
+                },
+                select: function (e, i) {
+                    $("#hfCustomer").val(i.item.val);
+                },
+                minLength: 1
+            });
+        });
+
+    </script>
+}

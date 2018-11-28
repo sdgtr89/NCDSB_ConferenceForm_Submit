@@ -1,0 +1,69 @@
+﻿@model NCDSB_ConferenceForm_Submit.Models.Expense
+
+@{
+    ViewBag.Title = "Confirm";
+}
+<head>
+    @Styles.Render("~/Content/FormOrganization.css")
+    @Styles.Render("~/Content/createCon.css")
+</head>
+<div class="row">
+    <h1>Conference Form</h1>
+    <h3>Confirm Expense</h3>
+    <hr />
+
+    @using (Html.BeginForm("Confirm", "Expense", FormMethod.Post, new { enctype = "multipart/form-data" }))
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-horizontal">
+
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            @Html.HiddenFor(model => model.ID)
+            @Html.HiddenFor(model => model.RowVersion)
+
+            <input type="hidden" name="conferenceFormID" value="@ViewBag.ConferenceFormID" />
+
+            <div>
+                @Html.DropDownList("ExpenseTypeID", null, htmlAttributes: new { @class = "form-control", @readonly = "readonly", @id = "dropdown" })
+                @Html.ValidationMessageFor(model => model.ExpenseTypeID, "", new { @class = "text-danger" })
+            </div>
+
+            <div>
+                @Html.EditorFor(model => model.ExpenseEstAmount, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                @Html.ValidationMessageFor(model => model.ExpenseEstAmount, "", new { @class = "text-danger" })
+            </div>
+
+            <div>
+                @Html.EditorFor(model => model.Reason, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                @Html.ValidationMessageFor(model => model.Reason, "", new { @class = "text-danger" })
+            </div>
+
+            <div>
+                @Html.EditorFor(model => model.ExpenseActAmount, new { htmlAttributes = new { @class = "form-control", @placeholder = "Enter actual amount...." } })
+                @Html.ValidationMessageFor(model => model.ExpenseActAmount, "", new { @class = "text-danger" })
+            </div>
+            <div>
+                    @Html.DropDownList("BudgetCodeID", null, "Select a Budget Code", htmlAttributes: new { @class = "form-control", @readonly = "readonly" })
+                    @Html.ValidationMessageFor(model => model.BudgetCodeID, "", new { @class = "text-danger" })
+                </div>
+            <div>
+                <label>Upload Receipt:</label>
+                <input type="file" class="" name="receiptUpload" /><br />
+
+                @*<label class="custom-file-upload">
+                        <input type="file" />
+                        Custom Upload
+                    </label>*@
+            </div>
+
+            <div>
+                <input type="submit" value="Confirm" class="btn btn-default" id="btnCenter" />
+            </div>
+
+        </div>
+    }
+</div>
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

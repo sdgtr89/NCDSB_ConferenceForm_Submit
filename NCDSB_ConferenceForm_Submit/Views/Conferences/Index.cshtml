@@ -1,0 +1,69 @@
+﻿@model PagedList.IPagedList<NCDSB_ConferenceForm_Submit.Models.Conference>
+@using PagedList.Mvc;
+<link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
+
+@{
+    ViewBag.Title = "Index";
+}
+@Html.Partial("menu")
+
+<head>
+    @Styles.Render("~/Content/FormOrganization.css")
+</head>
+
+<div class="row">
+    <h1>Conferences</h1>
+    <h2>Upcoming Conferences</h2>
+
+    <p>
+        <a class="btn btn-default" href="@Url.Action("Create", "Conferences")">Begin Form &raquo;</a>
+    </p>
+
+    <table class="table">
+        <tr class="topbar">
+            <th class="consCol1">
+                Conference
+            </th>
+            @*<th class="consCol2>
+                    Description
+                </th>*@
+            <th class="consCol3">
+                @Html.ActionLink("Start", "Index", new { sortOrder = ViewBag.StartSort })
+            </th>
+            <th class="consCol4">
+                @Html.ActionLink("End", "Index", new { sortOrder = ViewBag.EndSort })
+            </th>
+            <th class="consCol5">
+                @Html.ActionLink("Cost", "Index", new { sortOrder = ViewBag.CostSort })
+            </th>
+            <th class="consCol6"></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ConferenceSummary)
+                </td>
+                @*<td>
+                        @Html.DisplayFor(modelItem => item.Summary)
+                    </td>*@
+                <td>
+                    @Html.DisplayFor(modelItem => item.StartDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.EndDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Cost)
+                </td>
+                <td>
+                    @*@Html.ActionLink("Edit", "Edit", new { id = item.ID }) |*@
+                    @Html.ActionLink(" ", "Details", new { id = item.ID }, new { @class = "btn btn-primary glyphicon glyphicon-info-sign" })
+                    @*@Html.ActionLink("Delete", "Delete", new { id = item.ID })*@
+                </td>
+            </tr>
+        }
+
+    </table>
+</div>

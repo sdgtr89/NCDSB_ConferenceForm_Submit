@@ -1,0 +1,66 @@
+﻿@model PagedList.IPagedList<NCDSB_ConferenceForm_Submit.Models.ConferenceForm>
+@using PagedList.Mvc;
+<link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
+
+
+@{
+    ViewBag.Title = "Index";
+}
+@Html.Partial("menu")
+
+<head>
+    @Styles.Render("~/Content/FormOrganization.css")
+</head>
+
+<div class="row">
+    <h1>Conference Forms</h1>
+    <h2>Conference Form Requests</h2>
+
+    <div>
+        <p><a class="btn btn-default" href="@Url.Action("Create", "Conferences")">Begin Form &raquo;</a></p>
+    </div>
+
+    <table class="table">
+        <tr class="topbar">
+            <th class="conFromCol1">
+                @Html.DisplayName("Conference")
+            </th>
+            <th class="conFromCol2">
+                @Html.ActionLink("Date", "Index", new { sortOrder = ViewBag.DateSort })
+            </th>
+            <th class="conFromCol3">
+                @Html.DisplayName("Form Status")
+            </th>
+
+            <th class="conFromCol4"></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Conference.ConferenceSummary)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Date)
+                </td>
+
+                <td>
+                    @Html.DisplayFor(modelItem => item.FormStatus.StatusType)
+                </td>
+
+                <td>
+                    @Html.ActionLink(" ", "Details", new { id = item.ID }, new { @class = "btn btn-primary glyphicon glyphicon-info-sign" })
+                    @Html.ActionLink(" ", "Remove", new { id = item.ID }, new { @class = "btn btn-danger glyphicon glyphicon-remove" })
+                </td>
+
+
+            </tr>
+        }
+
+        Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+
+        @Html.PagedListPager(Model, page => Url.Action("Index", new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }))
+
+    </table>
+</div>

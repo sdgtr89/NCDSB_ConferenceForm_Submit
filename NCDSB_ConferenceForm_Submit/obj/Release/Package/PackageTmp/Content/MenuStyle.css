@@ -1,0 +1,267 @@
+﻿
+/*CSS added to make correct changes to _Layout.cshtml*/
+
+#logo-main {
+    display: block;
+    position: absolute;
+    top: 15px;
+    left: 15px;
+}
+
+/*resize logo */
+#logo-main img {
+    width: 260px;
+    height: auto;
+}
+
+/*center footer*/
+#footer {
+    text-align: center;
+    padding-top: 100px;
+    margin: 0px auto;
+    padding-bottom: 20px;
+}
+
+.navbar {
+    background-color: #0a419f;
+    box-shadow: 0 5px 15px 0 rgba(0, 0, 0, 0.25); 
+}
+
+/*Green button Log out*/
+.navbar-right li {
+    background-color: #00a84f;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+/*move nav bar down*/
+.navbar-fixed-top{
+    position: absolute;
+    margin-top: 90px;
+}
+
+/*removes space at very top of page*/
+body{
+    padding-top:0;
+}
+
+h1 {
+    font-family: Helvetica, Arial, sans-serif;
+    font-style: normal;
+    padding-right: 20px;
+    position: relative;
+    float: right;
+}
+
+h2 {
+    font-family: Helvetica, Arial, sans-serif;
+}
+
+p {
+    font-family: Segoe UI, Helvetica, Arial, sans-serif;
+}
+
+/*find a better way to move website content down*/
+.row {
+    padding-top: 170px;
+}
+
+
+/*CSS MENU FUNCTION */
+@@ -0,0 +1,58 @@ ﻿
+/*RESET*/*
+html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, font, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    outline: 0;
+    vertical-align: baseline;
+}
+
+/*Code starts*/
+#cssmenu,
+#cssmenu ul,
+#cssmenu li,
+#cssmenu a {
+    border: none;
+    line-height: 1;
+    margin: 0;
+    padding: 0;
+}
+
+#cssmenu {
+    height: 62px;
+    display: block;
+    width: auto;
+    margin: 0;
+    padding: 0;
+}
+
+#cssmenu > ul {
+    list-style: inside none;
+    margin: 0;
+    padding: 0;
+}
+
+#cssmenu > ul > li {
+    list-style: inside none;
+    float: left;
+    display: inline-block;
+    position: relative;
+    margin: 0;
+    padding: 0;
+}
+
+#Logo {
+    width: 90px;
+    height: 60px;
+    margin-left: 3px;
+    padding: 8px;
+    float: left;
+}
+
+#cssmenu.align-center > ul {
+    text-align: center;
+}
+
+#cssmenu.align-center > ul > li {
+    float: none;
+    margin-left: -3px;
+}
+
+#cssmenu.align-center ul ul {
+    text-align: left;
+}
+
+#cssmenu.align-center > ul > li:first-child > a {
+    border-radius: 0;
+}
+
+/*main menu*/
+#cssmenu > ul > li > a {
+    font-variant: small-caps;
+    outline: none;
+    display: block;
+    position: relative;
+    text-align: center;
+    text-decoration: none;
+    text-shadow: 1px 1px 0 rgba(0, 0, 0, 0.4);
+    font-weight: 200;
+    font-size: 15px; /*outside menu font size*/
+    font-family: Segoe UI, Helvetica, Arial, sans-serif;
+    color: #ffffff;
+    padding: 23px 30px; /*old padding 12px*/
+}
+
+#cssmenu > ul > li:first-child > a {
+    border-radius: 0;
+}
+
+/*Little White Arrows*/
+#cssmenu > ul > li.has-sub > a:before {
+    content: "";
+    position: absolute;
+    top: 18px;
+    right: 6px;
+    border: 5px solid transparent;
+    border-top: 5px solid #ffffff;
+}
+
+#cssmenu > ul > li.has-sub:hover > a:before {
+    top: 23px;
+}
+
+#cssmenu > ul > li.has-sub:hover > a {
+    padding-bottom: 23px;
+    z-index: 999;
+    border-color: #3f3f3f;
+}
+/*LOOKING FOR*/
+#cssmenu ul li.has-sub:hover > ul,
+#cssmenu ul li.has-sub:hover > div {
+    display: block;
+}
+
+#cssmenu > ul > li.has-sub > a:hover,
+#cssmenu > ul > li.has-sub:hover > a {
+    background: #03173b;
+    border-color: #03173b;
+}
+/*dropdown menu*/
+#cssmenu ul li > ul,
+#cssmenu ul li > div {
+    display: none;
+    width: auto;
+    position: absolute;
+    top: 61px;
+    background: #0a419f; 
+    border-radius: 0 0 5px 5px;
+    z-index: 999;
+    padding: 10px 0;
+}
+
+#cssmenu ul li > ul {
+    width: 200px;
+}
+
+#cssmenu ul ul ul {
+    position: absolute;
+}
+
+/*inner drop down menu */
+#cssmenu ul ul li:hover > ul {
+    left: 100%;
+    top: -10px;
+    border-radius: 0 0 5px 5px;
+}
+
+#cssmenu ul li > ul li {
+    display: block;
+    list-style: inside none;
+    position: relative;
+}
+
+/*drop down menu*/
+    #cssmenu ul li > ul li a {
+        outline: none;
+        display: block;
+        position: relative;
+        font: 11pt Segoe UI, Helvetica, Arial, sans-serif;
+        color: #ffffff;
+        text-decoration: none;
+        text-shadow: 1px 1px 0 #080808;
+        padding: 15px 20px;
+    }
+
+#cssmenu {
+    background: #0a419f;
+}
+
+#cssmenu ul ul > li:hover > a,
+#cssmenu ul ul li a:hover {
+    background: #03173b;
+}
+
+/*menu highlight color*/
+#cssmenu > ul > li > a:hover {
+    background: #03173b;
+    color: #ffffff;
+}
+cssmenu ul li .conForm {
+    background: #03173b;
+    color: #ffffff;
+}
+
+
+#cssmenu ul ul a:hover {
+    color: #ffffff;
+}
+
+/*small white arrows moving on hover*/
+#cssmenu > ul > li.has-sub > a:hover:before {
+    border-top: 5px solid #ffffff;
+}
+
+#cssmenu{
+    letter-spacing:1px;
+}

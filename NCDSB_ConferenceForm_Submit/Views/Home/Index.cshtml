@@ -1,0 +1,79 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+
+<head>
+    @Styles.Render("~/Content/FormOrganization.css")
+    @Styles.Render("~/Content/Home.css")
+</head>
+@Html.Partial("menu")
+
+<div class="row">
+    <h3>Remember</h3>
+    <div class="tabing">
+        <p>
+            <ul>
+                <li>
+                    Book 90 days in advance.
+                </li>
+                <li>
+                    Receipts and proof of purchase must be saved for reimbursement.
+                </li>
+                <li>
+                    Booked days are not guaranteed.
+                </li>
+            </ul>
+        </p>
+    </div>
+
+    <h3>How Do I Book A Conference?</h3>
+    <div class="tabing">
+        <p>
+            <ul>
+                <li>
+                    Conferences can be booked by selecting the “Conference Form” tab in the menu. Before you begin, you may browse
+                    a list of conferences already on record.
+                </li>
+            </ul>
+        </p>
+        <p><a class="btn btn-default" href="@Url.Action("Index", "Conferences")">Browse Conferences &raquo;</a></p>
+        <p>
+            <ul>
+                <li>
+                    Within the form, you can enter a conference and all its required information
+                </li>
+                <li>
+                    Upon completion, you will be able to view your submitted application, make changes and view your approval status.
+                </li>
+                <li>
+                    Don’t forget upon arriving home from the conference to complete the receipt upload or you will run the risk of
+                    reimbursement denial.
+                </li>
+            </ul>
+        </p>
+        <p><a class="btn btn-default" href="@Url.Action("Create", "ConferenceForms")">Begin Conference Form &raquo;</a></p>
+    </div>
+
+    <h3>How Do I Submit Mileage?</h3>
+    <div class="tabing">
+        <p>
+            <ul>
+                <li> 
+                    Mileage can be submitted by selecting the “Conference Form” tab in the menu.
+                </li>
+                    
+                <li>
+                    Within the form, you can enter and a departure and destination for a calculated trip.
+                </li>
+                <li>
+                    Upon completion, you will be able to view your submitted trips, make changes and view your running total costs before submission.
+                </li>
+                <li>
+                    Don’t forget upon arriving home from the conference to complete the receipt upload or you will run the risk of
+                    reimbursement denial.
+                </li>
+            </ul>
+        </p>
+        <p><a class="btn btn-default" href="@Url.Action("Create", "MileageForms")">Begin Mileage Form &raquo;</a></p>
+    </div>
+</div>

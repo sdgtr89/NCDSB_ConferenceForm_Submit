@@ -1,0 +1,74 @@
+﻿@using NCDSB_ConferenceForm_Submit.Models
+@model LoginViewModel
+
+@{
+    ViewBag.Title = "Log in";
+}
+
+<head>
+    @Styles.Render("~/Content/FormOrganization.css")
+</head>
+
+<div class="rowLogin">
+    <div class="col-md-8">
+        <h2 id="login">Login</h2>
+        <section id="loginForm">
+            @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+            {
+                @Html.AntiForgeryToken()
+                <hr />
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                <div class="form-group">
+                    @Html.LabelFor(m => m.Email, new { @class = "col-md-2 control-label" })
+                    <div class="col-md-10">
+                        @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(m => m.Password, new { @class = "col-md-2 control-label" })
+                    <div class="col-md-10">
+                        @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-10">
+                        <div class="checkbox">
+                            @Html.CheckBoxFor(m => m.RememberMe)
+                            @Html.LabelFor(m => m.RememberMe)
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-10">
+                        <input type="submit" value="Log in" class="btn btn-default" />
+                    </div>
+                </div>
+                @* Enable this once you have account confirmation enabled for password reset functionality
+                    <p>
+                        @Html.ActionLink("Forgot your password?", "ForgotPassword")
+                    </p>*@
+            }
+        </section>
+    </div>
+    <div class="col-md-4" style="text-align:center;">
+        <section>
+            <img src="~/Pictures/NCDSB_Logo.png" width="200" height="200" alt="The NCDSB Logo">
+        </section>
+        <br />
+        <img src="~/Pictures/BT_Logo.jpg" width="40" height="40" alt="The NCDSB Logo">
+        <img src="~/Pictures/DM_Logo.jpg" width="40" height="40" alt="The NCDSB Logo">
+        <img src="~/Pictures/HC_Logo.jpg" width="40" height="40" alt="The NCDSB Logo">
+        <img src="~/Pictures/LS_Logo.jpg" width="40" height="40" alt="The NCDSB Logo">
+        <img src="~/Pictures/ND_Logo.jpg" width="40" height="40" alt="The NCDSB Logo">
+        <img src="~/Pictures/SF_Logo.jpg" width="40" height="40" alt="The NCDSB Logo">
+        <img src="~/Pictures/SM_Logo.jpg" width="40" height="40" alt="The NCDSB Logo">
+        <img src="~/Pictures/SP_Logo.jpg" width="40" height="40" alt="The NCDSB Logo">
+
+    </div>
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

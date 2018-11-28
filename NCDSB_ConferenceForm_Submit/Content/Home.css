@@ -1,0 +1,19 @@
+﻿
+h2{
+    padding-bottom: 10px;
+    font-weight: bold;
+}
+
+.tabing{
+    margin-bottom: 50px;
+}
+
+li{
+    line-height: 200%;
+    /*font-size: 12pt;*/
+}
+
+.btn-default {
+    margin-left: 5px;
+    margin-bottom: 5px;
+}

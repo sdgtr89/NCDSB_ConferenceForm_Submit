@@ -1,0 +1,33 @@
+﻿@model NCDSB_ConferenceForm_Submit.Models.MileageForm
+
+@{
+    ViewBag.Title = "Create";
+}
+
+<div class="row">
+    <h2>Start Mileage Form</h2>
+
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-horizontal">
+            <h4>Form Date: @DateTime.Today.ToShortDateString()</h4>
+            
+            <h4>Click start to add trips to the form</h4>
+            <hr />
+
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="Start" class="btn btn-default" />
+                </div>
+            </div>
+        </div>
+    }
+
+    
+</div>
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
